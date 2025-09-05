@@ -1,0 +1,5 @@
+module liblcms2 {
+    header "../lcms2.h"
+
+    export *
+}
