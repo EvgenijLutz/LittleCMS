@@ -23,7 +23,7 @@
 #endif
 
 
-class ImageContainer {
+class ImageContainerOld {
 private:
     std::atomic<size_t> _referenceCounter;
     
@@ -37,14 +37,14 @@ private:
     char* nullable _iccpData;
     long _iccpLength;
     
-    friend ImageContainer* nullable ImageContainerRetain(ImageContainer* nullable container) SWIFT_RETURNS_UNRETAINED;
-    friend void ImageContainerRelease(ImageContainer* nullable container);
+    friend ImageContainerOld* nullable ImageContainerOldRetain(ImageContainerOld* nullable container) SWIFT_RETURNS_UNRETAINED;
+    friend void ImageContainerOldRelease(ImageContainerOld* nullable container);
     
-    ImageContainer(char* nonnull data, long width, long height, long numComponents, long componentSize, bool isHDR, char* nullable iccpData, long iccpLength);
-    ~ImageContainer();
+    ImageContainerOld(char* nonnull data, long width, long height, long numComponents, long componentSize, bool isHDR, char* nullable iccpData, long iccpLength);
+    ~ImageContainerOld();
     
 public:
-    static ImageContainer* nullable create(const char* nonnull data, long width, long height, long numComponents, long componentSize, bool isHDR, char* nullable iccpData = nullptr, long iccpLength = 0) SWIFT_RETURNS_RETAINED;
+    static ImageContainerOld* nullable create(const char* nonnull data, long width, long height, long numComponents, long componentSize, bool isHDR, char* nullable iccpData = nullptr, long iccpLength = 0) SWIFT_RETURNS_RETAINED;
     
     char* nonnull getData() SWIFT_COMPUTED_PROPERTY { return _data; }
     long getDataSize() SWIFT_COMPUTED_PROPERTY { return _width * _height * _numComponents * _componentSize; }
@@ -56,16 +56,16 @@ public:
     
     const char* nullable getICCData() SWIFT_COMPUTED_PROPERTY { return _iccpData; }
     long getICCDataLength() SWIFT_COMPUTED_PROPERTY { return _iccpLength; }
-} SWIFT_SHARED_REFERENCE(ImageContainerRetain, ImageContainerRelease);
+} SWIFT_SHARED_REFERENCE(ImageContainerOldRetain, ImageContainerOldRelease);
 
 
-ImageContainer* nullable convertToLinearDCIP3(const char* nonnull sourceData,
+ImageContainerOld* nullable convertToLinearDCIP3(const char* nonnull sourceData,
                                               long width, long height,
                                               long numComponents, long componentSize,
                                               bool isHDR,
                                               const char* nullable iccpData, long iccpLength
                                               ) SWIFT_RETURNS_RETAINED;
 
-#endif // __cplusplus
+#endif
 
-#endif // LCMS2C_hpp
+#endif

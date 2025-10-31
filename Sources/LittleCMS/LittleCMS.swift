@@ -1,8 +1,8 @@
 // The Swift Programming Language
 // https://docs.swift.org/swift-book
 
-import LCMS2C
 import Foundation
+@_exported import LCMS2C
 
 
 public enum LittleCMSError: Error {
@@ -16,7 +16,7 @@ public enum LittleCMSError: Error {
 import CoreGraphics
 
 
-public extension ImageContainer {
+public extension ImageContainerOld {
     var cgImage: CGImage  {
         get throws {
             let contents = Data(bytes: data, count: dataSize)

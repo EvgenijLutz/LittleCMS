@@ -10,7 +10,7 @@
 #include <algorithm>
 
 
-ImageContainer::ImageContainer(char* nonnull data, long width, long height, long numComponents, long componentSize, bool isHDR, char* nullable iccpData, long iccpLength):
+ImageContainerOld::ImageContainerOld(char* nonnull data, long width, long height, long numComponents, long componentSize, bool isHDR, char* nullable iccpData, long iccpLength):
 _referenceCounter(1),
 _data(data),
 _width(width),
@@ -23,14 +23,14 @@ _iccpLength(iccpLength) {
     //
 }
 
-ImageContainer::~ImageContainer() {
-    printf("Destroy ImageContainer\n");
+ImageContainerOld::~ImageContainerOld() {
+    printf("Destroy ImageContainerOld\n");
     delete [] _data;
     delete [] _iccpData;
 }
 
 
-ImageContainer* nullable ImageContainer::create(const char* nonnull data, long width, long height, long numComponents, long componentSize, bool isHDR, char* nullable iccpData, long iccpLength) {
+ImageContainerOld* nullable ImageContainerOld::create(const char* nonnull data, long width, long height, long numComponents, long componentSize, bool isHDR, char* nullable iccpData, long iccpLength) {
     auto dataSize = width * height * numComponents * componentSize;
     auto dataCopy = new char[dataSize];
     memcpy(dataCopy, data, dataSize);
@@ -41,11 +41,11 @@ ImageContainer* nullable ImageContainer::create(const char* nonnull data, long w
         memcpy(iccpDataCopy, iccpData, iccpLength);
     }
     
-    return new ImageContainer(dataCopy, width, height, numComponents, componentSize, isHDR, iccpDataCopy, iccpLength);
+    return new ImageContainerOld(dataCopy, width, height, numComponents, componentSize, isHDR, iccpDataCopy, iccpLength);
 }
 
 
-ImageContainer* nullable ImageContainerRetain(ImageContainer* nullable container) {
+ImageContainerOld* nullable ImageContainerOldRetain(ImageContainerOld* nullable container) {
     if (container) {
         container->_referenceCounter.fetch_add(1);
     }
@@ -53,14 +53,14 @@ ImageContainer* nullable ImageContainerRetain(ImageContainer* nullable container
 }
 
 
-void ImageContainerRelease(ImageContainer* nullable container) {
+void ImageContainerOldRelease(ImageContainerOld* nullable container) {
     if (container && container->_referenceCounter.fetch_sub(1) == 1) {
         delete container;
     }
 }
 
 
-ImageContainer* nullable convertToLinearDCIP3(const char* nonnull sourceData,
+ImageContainerOld* nullable convertToLinearDCIP3(const char* nonnull sourceData,
                                               long width, long height,
                                               long numComponents, long componentSize,
                                               bool isHDR,
@@ -274,7 +274,7 @@ ImageContainer* nullable convertToLinearDCIP3(const char* nonnull sourceData,
     cmsCloseProfile(dstProfile);
     cmsFreeToneCurve(linear);
     
-    auto image = ImageContainer::create(linearP3, width, height, numComponents, outputComponentSize, isHDR, iccProfileData, iccProfileSize);
+    auto image = ImageContainerOld::create(linearP3, width, height, numComponents, outputComponentSize, isHDR, iccProfileData, iccProfileSize);
     
     delete [] iccProfileData;
     delete [] linearP3;
