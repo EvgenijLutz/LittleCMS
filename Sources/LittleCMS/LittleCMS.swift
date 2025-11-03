@@ -16,7 +16,7 @@ public enum LittleCMSError: Error {
 import CoreGraphics
 
 
-public extension ImageContainerOld {
+public extension LCMSImage {
     var cgImage: CGImage  {
         get throws {
             let contents = Data(bytes: data, count: dataSize)
