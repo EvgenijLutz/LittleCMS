@@ -61,7 +61,7 @@ struct ComponentConverter {
 };
 
 
-LCMSImage::LCMSImage(char* lc_nonnull data, long width, long height, long numComponents, long componentSize, bool isHDR, LCMSColorProfile* lc_nullable colorProfile):
+LCMSImage::LCMSImage(char* fn_nonnull data, long width, long height, long numComponents, long componentSize, bool isHDR, LCMSColorProfile* fn_nullable colorProfile):
 _referenceCounter(1),
 _data(data),
 _width(width),
@@ -69,28 +69,28 @@ _height(height),
 _numComponents(numComponents),
 _componentSize(componentSize),
 _isHDR(isHDR),
-_colorProfile(LCMSColorProfileRetain(colorProfile)) {
+_colorProfile(colorProfile) {
     //
 }
 
 LCMSImage::~LCMSImage() {
-    printf("Destroy LCMSImage\n");
+    //printf("Destroy LCMSImage\n");
     delete [] _data;
     LCMSColorProfileRelease(_colorProfile);
 }
 
 
-LCMSImage* lc_nullable LCMSImage::create(const char* lc_nonnull data, long width, long height, long numComponents, long componentSize, bool isHDR, LCMSColorProfile* lc_nullable colorProfile) {
+LCMSImage* fn_nullable LCMSImage::create(const char* fn_nonnull data, long width, long height, long numComponents, long componentSize, bool isHDR, LCMSColorProfile* fn_nullable colorProfile) {
     // TODO: Perform sanity checks
     auto dataSize = width * height * numComponents * componentSize;
     auto dataCopy = new char[dataSize];
     memcpy(dataCopy, data, dataSize);
     
-    return new LCMSImage(dataCopy, width, height, numComponents, componentSize, isHDR, colorProfile);
+    return new LCMSImage(dataCopy, width, height, numComponents, componentSize, isHDR, LCMSColorProfileRetain(colorProfile));
 }
 
 
-static cmsHPROFILE lc_nullable _createProfileOrSRGB(LCMSColorProfile* lc_nonnull profile) {
+static cmsHPROFILE fn_nullable _createProfileOrSRGB(LCMSColorProfile* fn_nonnull profile) {
     if (profile) {
         return cmsOpenProfileFromMem(profile->getData(), static_cast<cmsUInt32Number>(profile->getSize()));
     }
@@ -99,16 +99,16 @@ static cmsHPROFILE lc_nullable _createProfileOrSRGB(LCMSColorProfile* lc_nonnull
 }
 
 
-bool LCMSImage::convertColorProfile(LCMSColorProfile* lc_nullable targetColorProfile) {
+bool LCMSImage::convertColorProfile(LCMSColorProfile* fn_nullable targetColorProfile) {
     // Create source color profile
-    cmsHPROFILE srcProfile = _createProfileOrSRGB(_colorProfile);
+    auto srcProfile = _createProfileOrSRGB(_colorProfile);
     if (srcProfile == nullptr) {
         printf("Could not create source ICC profile\n");
         return false;
     }
     
     // Create destination color profile
-    cmsHPROFILE dstProfile = _createProfileOrSRGB(targetColorProfile);
+    auto dstProfile = _createProfileOrSRGB(targetColorProfile);
     if (dstProfile == nullptr) {
         printf("Could not create destination ICC profile\n");
         cmsCloseProfile(srcProfile);
@@ -143,7 +143,7 @@ bool LCMSImage::convertColorProfile(LCMSColorProfile* lc_nullable targetColorPro
                                                  INTENT_ABSOLUTE_COLORIMETRIC,
                                                  0 |
                                                  cmsFLAGS_HIGHRESPRECALC |
-                                                 cmsFLAGS_GAMUTCHECK |
+                                                 //cmsFLAGS_GAMUTCHECK |
                                                  cmsFLAGS_NOOPTIMIZE |
                                                  cmsFLAGS_NONEGATIVES |
                                                  cmsFLAGS_COPY_ALPHA
@@ -205,14 +205,14 @@ bool LCMSImage::convertColorProfile(LCMSColorProfile* lc_nullable targetColorPro
 
 //
 
-LCMSImage* lc_nullable LCMSImageRetain(LCMSImage* lc_nullable container) {
+LCMSImage* fn_nullable LCMSImageRetain(LCMSImage* fn_nullable container) {
     if (container) {
         container->_referenceCounter.fetch_add(1);
     }
     return container;
 }
 
-void LCMSImageRelease(LCMSImage* lc_nullable container) {
+void LCMSImageRelease(LCMSImage* fn_nullable container) {
     if (container && container->_referenceCounter.fetch_sub(1) == 1) {
         delete container;
     }
@@ -221,11 +221,11 @@ void LCMSImageRelease(LCMSImage* lc_nullable container) {
 
 //
 
-LCMSImage* lc_nullable convertToLinearDCIP3(const char* lc_nonnull sourceData,
+LCMSImage* fn_nullable convertToLinearDCIP3(const char* fn_nonnull sourceData,
                                                     long width, long height,
                                                     long numComponents, long componentSize,
                                                     bool isHDR,
-                                                    const char* lc_nullable iccData, long iccLength) {
+                                                    const char* fn_nullable iccData, long iccLength) {
     if (width < 1) {
         printf("Invalid width: %ld\n", width);
         return nullptr;

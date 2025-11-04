@@ -17,7 +17,7 @@ class LCMSImage final {
 private:
     std::atomic<size_t> _referenceCounter;
     
-    char* lc_nonnull _data;
+    char* fn_nonnull _data;
     long _width;
     long _height;
     long _numComponents;
@@ -27,34 +27,34 @@ private:
     bool _isHDR;
     
     /// If no color profile is specified, it's assumed to be `sRGB`.
-    LCMSColorProfile* lc_nullable _colorProfile;
+    LCMSColorProfile* fn_nullable _colorProfile;
     
-    friend LCMSImage* lc_nullable LCMSImageRetain(LCMSImage* lc_nullable container) SWIFT_RETURNS_UNRETAINED;
-    friend void LCMSImageRelease(LCMSImage* lc_nullable container);
+    friend LCMSImage* fn_nullable LCMSImageRetain(LCMSImage* fn_nullable container) SWIFT_RETURNS_UNRETAINED;
+    friend void LCMSImageRelease(LCMSImage* fn_nullable container);
     
-    LCMSImage(char* lc_nonnull data, long width, long height, long numComponents, long componentSize, bool isHDR, LCMSColorProfile* lc_nullable colorProfile);
+    LCMSImage(char* fn_nonnull data, long width, long height, long numComponents, long componentSize, bool isHDR, LCMSColorProfile* fn_nullable colorProfile);
     ~LCMSImage();
     
 public:
-    static LCMSImage* lc_nullable create(const char* lc_nonnull data, long width, long height, long numComponents, long componentSize, bool isHDR, LCMSColorProfile* lc_nullable colorProfile = nullptr) SWIFT_RETURNS_RETAINED;
+    static LCMSImage* fn_nullable create(const char* fn_nonnull data, long width, long height, long numComponents, long componentSize, bool isHDR, LCMSColorProfile* fn_nullable colorProfile = nullptr) SWIFT_RETURNS_RETAINED;
     
     /// If no target color profile is specified, it's assumed to be `sRGB`.
-    bool convertColorProfile(LCMSColorProfile* lc_nullable targetColorProfile);
+    bool convertColorProfile(LCMSColorProfile* fn_nullable targetColorProfile);
     
-    char* lc_nonnull getData() SWIFT_COMPUTED_PROPERTY { return _data; }
+    char* fn_nonnull getData() SWIFT_COMPUTED_PROPERTY { return _data; }
     long getDataSize() SWIFT_COMPUTED_PROPERTY { return _width * _height * _numComponents * _componentSize; }
     long getWidth() const SWIFT_COMPUTED_PROPERTY { return _width; }
     long getHeight() const SWIFT_COMPUTED_PROPERTY { return _height; }
     long getNumComponents() const SWIFT_COMPUTED_PROPERTY { return _numComponents; }
     long getComponentSize() const SWIFT_COMPUTED_PROPERTY { return _componentSize; }
     long getIsHDR() const SWIFT_COMPUTED_PROPERTY { return _isHDR; }
-    LCMSColorProfile* lc_nullable getColorProfile() SWIFT_COMPUTED_PROPERTY SWIFT_RETURNS_UNRETAINED { return _colorProfile; }
+    LCMSColorProfile* fn_nullable getColorProfile() SWIFT_COMPUTED_PROPERTY SWIFT_RETURNS_UNRETAINED { return _colorProfile; }
 } SWIFT_SHARED_REFERENCE(LCMSImageRetain, LCMSImageRelease);
 
 
-LCMSImage* lc_nullable convertToLinearDCIP3(const char* lc_nonnull sourceData,
+LCMSImage* fn_nullable convertToLinearDCIP3(const char* fn_nonnull sourceData,
                                             long width, long height,
                                             long numComponents, long componentSize,
                                             bool isHDR,
-                                            const char* lc_nullable iccpData, long iccpLength
+                                            const char* fn_nullable iccpData, long iccpLength
                                             ) SWIFT_RETURNS_RETAINED;
