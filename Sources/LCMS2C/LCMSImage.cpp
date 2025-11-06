@@ -15,6 +15,8 @@ struct ComponentConverter {
     static cmsUInt32Number C1(long componentSize) {
         switch (componentSize) {
             case 1: return TYPE_GRAY_8;
+            // TODO: Explore this option to avoid memory copying
+            //case 2: return TYPE_GRAY_HALF_FLT;
             case 2: return TYPE_GRAY_16_SE;
             case 4: return TYPE_GRAY_FLT;
             default: return 0;
@@ -24,6 +26,8 @@ struct ComponentConverter {
     static cmsUInt32Number C2(long componentSize) {
         switch (componentSize) {
             case 1: return TYPE_GRAYA_8;
+            // TODO: no TYPE_GRAYA_HALF_FLT?
+            //case 2: return TYPE_GRAY_HALF_FLT;
             case 2: return TYPE_GRAYA_16_SE;
             case 4: return TYPE_GRAYA_FLT;
             default: return 0;
@@ -33,6 +37,8 @@ struct ComponentConverter {
     static cmsUInt32Number C3(long componentSize) {
         switch (componentSize) {
             case 1: return TYPE_RGB_8;
+            // TODO: Explore this option to avoid memory copying
+            //case 2: return TYPE_RGB_HALF_FLT;
             case 2: return TYPE_RGB_16_SE;
             case 4: return TYPE_RGB_FLT;
             default: return 0;
@@ -42,6 +48,8 @@ struct ComponentConverter {
     static cmsUInt32Number C4(long componentSize) {
         switch (componentSize) {
             case 1: return TYPE_RGBA_8;
+            // TODO: Explore this option to avoid memory copying
+            //case 2: return TYPE_RGBA_HALF_FLT;
             case 2: return TYPE_RGBA_16_SE;
             case 4: return TYPE_RGBA_FLT;
             default: return 0;
@@ -137,16 +145,24 @@ bool LCMSImage::convertColorProfile(LCMSColorProfile* fn_nullable targetColorPro
     
     // Create transform
     cmsUInt32Number format = ComponentConverter::calculate(_numComponents, proxyComponentSize);
+    //cmsHTRANSFORM transform = cmsCreateTransform(srcProfile, format,
+    //                                             dstProfile, format,
+    //                                             //srcProfile, inputFormat,
+    //                                             INTENT_ABSOLUTE_COLORIMETRIC,
+    //                                             0 |
+    //                                             cmsFLAGS_HIGHRESPRECALC |
+    //                                             //cmsFLAGS_GAMUTCHECK |
+    //                                             cmsFLAGS_NOOPTIMIZE |
+    //                                             cmsFLAGS_NONEGATIVES |
+    //                                             cmsFLAGS_COPY_ALPHA
+    //                                             );
     cmsHTRANSFORM transform = cmsCreateTransform(srcProfile, format,
                                                  dstProfile, format,
                                                  //srcProfile, inputFormat,
-                                                 INTENT_ABSOLUTE_COLORIMETRIC,
-                                                 0 |
-                                                 cmsFLAGS_HIGHRESPRECALC |
-                                                 //cmsFLAGS_GAMUTCHECK |
+                                                 INTENT_RELATIVE_COLORIMETRIC,
+                                                 cmsFLAGS_NOCACHE |
                                                  cmsFLAGS_NOOPTIMIZE |
-                                                 cmsFLAGS_NONEGATIVES |
-                                                 cmsFLAGS_COPY_ALPHA
+                                                 cmsFLAGS_NOWHITEONWHITEFIXUP
                                                  );
     if (transform == nullptr) {
         printf("Could not create color profile transform\n");

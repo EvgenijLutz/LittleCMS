@@ -29,6 +29,10 @@ private:
     
 public:
     static LCMSColorProfile* fn_nonnull create(const void* fn_nonnull data, long size) SWIFT_RETURNS_RETAINED;
+    /// sRGB color profile.
+    ///
+    /// - Seealso: [sRGB profiles](https://www.color.org/srgbprofiles.xalter)
+    static LCMSColorProfile* fn_nonnull createSRGB() SWIFT_RETURNS_RETAINED;
     /// Rec. 709 Reference Display - the ITU-R Recommendation 709 standard.
     ///
     /// - Seealso: [Rec. 709 Reference Display](https://www.color.org/rec709.xalter)
@@ -42,10 +46,12 @@ public:
     static LCMSColorProfile* fn_nonnull createDCIP3() SWIFT_RETURNS_RETAINED;
     static LCMSColorProfile* fn_nonnull createDCIP3D65() SWIFT_RETURNS_RETAINED;
     
-    LCMSColorProfile* fn_nullable createLinear() SWIFT_RETURNS_RETAINED;
+    LCMSColorProfile* fn_nullable createLinear(bool force = true) SWIFT_RETURNS_RETAINED SWIFT_NAME(createLinear(force:));
     
     const char* fn_nonnull getData() SWIFT_COMPUTED_PROPERTY { return _data; }
     long getSize() SWIFT_COMPUTED_PROPERTY { return _size; }
+    
+    bool getIsLinear() SWIFT_COMPUTED_PROPERTY;
 }
 SWIFT_SHARED_REFERENCE(LCMSColorProfileRetain, LCMSColorProfileRelease)
 SWIFT_UNCHECKED_SENDABLE;
