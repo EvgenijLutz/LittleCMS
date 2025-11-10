@@ -9,14 +9,14 @@
 #include <lcms2.h>
 
 
-static char* fn_nonnull copyData(const void* fn_nonnull source, long size) {
+static char* fn_nonnull copyData(const void* fn_nonnull source fn_noescape, long size) {
     auto copy = new char[size];
     std::memcpy(copy, source, size);
     return copy;
 }
 
 
-LCMSColorProfile::LCMSColorProfile(const char* fn_nonnull data, long size):
+LCMSColorProfile::LCMSColorProfile(const char* fn_nonnull data fn_noescape, long size):
 _referenceCounter(1),
 _data(data),
 _size(size) {
@@ -29,7 +29,7 @@ LCMSColorProfile::~LCMSColorProfile() {
 }
 
 
-LCMSColorProfile* fn_nonnull LCMSColorProfile::create(const void* fn_nonnull data, long size) SWIFT_RETURNS_RETAINED {
+LCMSColorProfile* fn_nonnull LCMSColorProfile::create(const void* fn_nonnull data fn_noescape, long size) SWIFT_RETURNS_RETAINED {
     return new LCMSColorProfile(copyData(data, size), size);
 }
 

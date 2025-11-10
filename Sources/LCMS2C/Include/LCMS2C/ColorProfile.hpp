@@ -21,18 +21,20 @@ private:
     const char* fn_nonnull _data;
     long _size;
     
-    LCMSColorProfile(const char* fn_nonnull data, long size);
+    LCMSColorProfile(const char* fn_nonnull data fn_noescape, long size);
     ~LCMSColorProfile();
     
     friend LCMSColorProfile* fn_nullable LCMSColorProfileRetain(LCMSColorProfile* fn_nullable value) SWIFT_RETURNS_UNRETAINED;
     friend void LCMSColorProfileRelease(LCMSColorProfile* fn_nullable value);
     
 public:
-    static LCMSColorProfile* fn_nonnull create(const void* fn_nonnull data, long size) SWIFT_RETURNS_RETAINED;
+    static LCMSColorProfile* fn_nonnull create(const void* fn_nonnull data fn_noescape, long size) SWIFT_RETURNS_RETAINED;
+    
     /// sRGB color profile.
     ///
     /// - Seealso: [sRGB profiles](https://www.color.org/srgbprofiles.xalter)
     static LCMSColorProfile* fn_nonnull createSRGB() SWIFT_RETURNS_RETAINED;
+    
     /// Rec. 709 Reference Display - the ITU-R Recommendation 709 standard.
     ///
     /// - Seealso: [Rec. 709 Reference Display](https://www.color.org/rec709.xalter)

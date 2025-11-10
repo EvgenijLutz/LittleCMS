@@ -156,14 +156,18 @@ bool LCMSImage::convertColorProfile(LCMSColorProfile* fn_nullable targetColorPro
     //                                             cmsFLAGS_NONEGATIVES |
     //                                             cmsFLAGS_COPY_ALPHA
     //                                             );
+    
+    cmsUInt32Number flags = cmsFLAGS_NOCACHE | cmsFLAGS_NOOPTIMIZE | cmsFLAGS_NOWHITEONWHITEFIXUP;
+    // TODO: Check if image contains alpha channel
+    if (true) {
+        flags |= cmsFLAGS_COPY_ALPHA;
+    }
+    
     cmsHTRANSFORM transform = cmsCreateTransform(srcProfile, format,
                                                  dstProfile, format,
                                                  //srcProfile, inputFormat,
                                                  INTENT_RELATIVE_COLORIMETRIC,
-                                                 cmsFLAGS_NOCACHE |
-                                                 cmsFLAGS_NOOPTIMIZE |
-                                                 cmsFLAGS_NOWHITEONWHITEFIXUP
-                                                 );
+                                                 flags);
     if (transform == nullptr) {
         printf("Could not create color profile transform\n");
         cmsCloseProfile(dstProfile);
