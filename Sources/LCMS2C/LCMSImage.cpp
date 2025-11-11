@@ -15,9 +15,7 @@ struct ComponentConverter {
     static cmsUInt32Number C1(long componentSize) {
         switch (componentSize) {
             case 1: return TYPE_GRAY_8;
-            // TODO: Explore this option to avoid memory copying
-            //case 2: return TYPE_GRAY_HALF_FLT;
-            case 2: return TYPE_GRAY_16_SE;
+            case 2: return TYPE_GRAY_HALF_FLT;
             case 4: return TYPE_GRAY_FLT;
             default: return 0;
         }
@@ -37,9 +35,7 @@ struct ComponentConverter {
     static cmsUInt32Number C3(long componentSize) {
         switch (componentSize) {
             case 1: return TYPE_RGB_8;
-            // TODO: Explore this option to avoid memory copying
-            //case 2: return TYPE_RGB_HALF_FLT;
-            case 2: return TYPE_RGB_16_SE;
+            case 2: return TYPE_RGB_HALF_FLT;
             case 4: return TYPE_RGB_FLT;
             default: return 0;
         }
@@ -48,9 +44,7 @@ struct ComponentConverter {
     static cmsUInt32Number C4(long componentSize) {
         switch (componentSize) {
             case 1: return TYPE_RGBA_8;
-            // TODO: Explore this option to avoid memory copying
-            //case 2: return TYPE_RGBA_HALF_FLT;
-            case 2: return TYPE_RGBA_16_SE;
+            case 2: return TYPE_RGBA_HALF_FLT;
             case 4: return TYPE_RGBA_FLT;
             default: return 0;
         }
@@ -124,10 +118,11 @@ bool LCMSImage::convertColorProfile(LCMSColorProfile* fn_nullable targetColorPro
     }
     
     
-    // Prepare proxy data - lcms accepts 2-byte images only as ushort, but we store it as half float to unlock hdr
+    // Prepare proxy data - lcms accepts 2-byte images with two channels only as ushort, but we store it as half float to unlock hdr
     auto proxyComponentSize = _componentSize;
     auto proxyData = _data;
-    if (proxyComponentSize == 2) {
+    if (proxyComponentSize == 2 && _numComponents == 2) {
+        printf("Create proxy image\n");
         proxyComponentSize = 4;
         proxyData = new char[_width * _height * _numComponents * proxyComponentSize];
         auto halfs = reinterpret_cast<__fp16*>(_data);
@@ -157,7 +152,12 @@ bool LCMSImage::convertColorProfile(LCMSColorProfile* fn_nullable targetColorPro
     //                                             cmsFLAGS_COPY_ALPHA
     //                                             );
     
-    cmsUInt32Number flags = cmsFLAGS_NOCACHE | cmsFLAGS_NOOPTIMIZE | cmsFLAGS_NOWHITEONWHITEFIXUP;
+    cmsUInt32Number flags = cmsFLAGS_NOCACHE |
+    cmsFLAGS_NOOPTIMIZE |
+    cmsFLAGS_HIGHRESPRECALC |
+    cmsFLAGS_GAMUTCHECK |
+    cmsFLAGS_NOWHITEONWHITEFIXUP |
+    cmsFLAGS_NONEGATIVES;
     // TODO: Check if image contains alpha channel
     if (true) {
         flags |= cmsFLAGS_COPY_ALPHA;
@@ -166,7 +166,7 @@ bool LCMSImage::convertColorProfile(LCMSColorProfile* fn_nullable targetColorPro
     cmsHTRANSFORM transform = cmsCreateTransform(srcProfile, format,
                                                  dstProfile, format,
                                                  //srcProfile, inputFormat,
-                                                 INTENT_RELATIVE_COLORIMETRIC,
+                                                 INTENT_ABSOLUTE_COLORIMETRIC,
                                                  flags);
     if (transform == nullptr) {
         printf("Could not create color profile transform\n");
