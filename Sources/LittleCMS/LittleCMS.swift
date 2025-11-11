@@ -16,6 +16,28 @@ public enum LittleCMSError: Error {
 import CoreGraphics
 
 
+public extension LCMSColorProfile {
+    var colorSpace: CGColorSpace? {        
+        guard size > 0 else {
+            return nil
+        }
+        
+        let iccProfileData = Data(bytes: data, count: size)
+        guard let colorProfile = CGColorSpace(iccData: iccProfileData as CFData) else {
+            return nil
+        }
+        
+        //if hdr {
+        //    if let extendedColorProfile = CGColorSpaceCreateExtended(colorProfile) {
+        //        return extendedColorProfile
+        //    }
+        //}
+        
+        return colorProfile
+    }
+}
+
+
 public extension LCMSImage {
     var cgImage: CGImage  {
         get throws {
