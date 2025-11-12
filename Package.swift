@@ -8,10 +8,10 @@ let package = Package(
     // See the "Minimum Deployment Version for Reference Types Imported from C++":
     // https://www.swift.org/documentation/cxx-interop/status/
     platforms: [
-        .macOS(.v14),
-        .iOS(.v17),
-        .tvOS(.v17),
-        .watchOS(.v10),
+        .macOS(.v10_13),
+        .iOS(.v12),
+        .tvOS(.v12),
+        .watchOS(.v8),
         .visionOS(.v1)
     ],
     products: [

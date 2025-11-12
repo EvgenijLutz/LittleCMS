@@ -16,6 +16,7 @@ public enum LittleCMSError: Error {
 import CoreGraphics
 
 
+@available(macOS 13.3.0, iOS 16.4.0, tvOS 16.4.0, visionOS 1.0, watchOS 9.4, *)
 public extension LCMSColorProfile {
     var colorSpace: CGColorSpace? {        
         guard size > 0 else {
@@ -27,18 +28,16 @@ public extension LCMSColorProfile {
             return nil
         }
         
-        //if hdr {
-        //    if let extendedColorProfile = CGColorSpaceCreateExtended(colorProfile) {
-        //        return extendedColorProfile
-        //    }
-        //}
-        
         return colorProfile
     }
 }
 
 
+@available(macOS 13.3.0, iOS 16.4.0, tvOS 16.4.0, visionOS 1.0, watchOS 9.4, *)
 public extension LCMSImage {
+    /// CGImage representation.
+    ///
+    ///
     var cgImage: CGImage  {
         get throws {
             let contents = Data(bytes: data, count: dataSize)
@@ -47,24 +46,24 @@ public extension LCMSImage {
             }
             
             let colorSpace: CGColorSpace? = {
-#if false
-                // Create color space from ImageContainer's ICC profile info
-                if let iccData {
-                    let iccContents = Data(bytes: iccData, count: iccDataLength)
-                    let iccData = iccContents as CFData
-                    return CGColorSpace(iccData: iccData)
+                // Create color space from LCMSImage's ICC profile info
+                if let colorProfile, let colorSpace = colorProfile.colorSpace {
+                    if ishdr, let hdrColorSpace = CGColorSpaceCreateExtended(colorSpace) {
+                        return hdrColorSpace
+                    }
+                    
+                    return colorSpace
                 }
-#endif
                 
+                // Guess the color profile
                 //return CGColorSpace(name: CGColorSpace.sRGB)
                 //return CGColorSpace(name: CGColorSpace.linearDisplayP3)
                 //return CGColorSpace(name: CGColorSpace.extendedDisplayP3)
                 return CGColorSpace(name: CGColorSpace.extendedLinearDisplayP3)
             }()
+            
             guard let colorSpace = colorSpace else {
                 throw LittleCMSError.other("No color space :(")
-            }
-            do {
             }
             
             let alphaFlag: UInt32

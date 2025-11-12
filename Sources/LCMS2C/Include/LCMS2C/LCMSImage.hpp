@@ -47,7 +47,7 @@ public:
     long getHeight() const SWIFT_COMPUTED_PROPERTY { return _height; }
     long getNumComponents() const SWIFT_COMPUTED_PROPERTY { return _numComponents; }
     long getComponentSize() const SWIFT_COMPUTED_PROPERTY { return _componentSize; }
-    long getIsHDR() const SWIFT_COMPUTED_PROPERTY { return _isHDR; }
+    bool getIsHDR() const SWIFT_COMPUTED_PROPERTY { return _isHDR; }
     LCMSColorProfile* fn_nullable getColorProfile() SWIFT_COMPUTED_PROPERTY SWIFT_RETURNS_UNRETAINED { return _colorProfile; }
 } SWIFT_SHARED_REFERENCE(LCMSImageRetain, LCMSImageRelease);
 
