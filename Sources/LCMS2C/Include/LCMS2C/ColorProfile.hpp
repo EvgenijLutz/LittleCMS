@@ -54,6 +54,7 @@ public:
     long getSize() SWIFT_COMPUTED_PROPERTY { return _size; }
     
     bool getIsLinear() SWIFT_COMPUTED_PROPERTY;
+    //bool getIsSRGB() SWIFT_COMPUTED_PROPERTY;
 }
 SWIFT_SHARED_REFERENCE(LCMSColorProfileRetain, LCMSColorProfileRelease)
 SWIFT_UNCHECKED_SENDABLE;

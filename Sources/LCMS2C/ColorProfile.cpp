@@ -58,6 +58,9 @@ LCMSColorProfile* fn_nonnull LCMSColorProfile::createSRGB() SWIFT_RETURNS_RETAIN
     
     // Create profile
     auto sRGBProfile = LCMSColorProfile::create(profileData, profileSize);
+    
+    // Clean up
+    delete [] profileData;
     cmsCloseProfile(profile);
     
     return sRGBProfile;
@@ -259,6 +262,69 @@ bool LCMSColorProfile::getIsLinear() {
     
     return isLinear;
 }
+
+
+//static bool compareTRC(cmsToneCurve* a, cmsToneCurve* b) {
+//    if (!a || !b) return false;
+//
+//    // Compare parametric curves first
+//    //if (cmsIsToneCurveParametric(a) && cmsIsToneCurveParametric(b)) {
+//    //    int typeA, typeB;
+//    //    const double* paramsA = cmsGetToneCurveParams(a, &typeA);
+//    //    const double* paramsB = cmsGetToneCurveParams(b, &typeB);
+//    //
+//    //    if (typeA != typeB) return false;
+//    //    for (int i = 0; i < 10; i++) {
+//    //        if (fabs(paramsA[i] - paramsB[i]) > 1e-6)
+//    //            return false;
+//    //    }
+//    //    return true;
+//    //}
+//
+//    // Fallback: sample both curves at multiple points
+//    for (int i = 0; i < 256; i++) {
+//        double x = (double)i / 255.0;
+//        double yA = cmsEvalToneCurveFloat(a, x);
+//        double yB = cmsEvalToneCurveFloat(b, x);
+//
+//        if (fabs(yA - yB) > 1e-5) {
+//            return false;
+//        }
+//    }
+//    
+//    return true;
+//}
+
+
+//bool LCMSColorProfile::getIsSRGB() {
+//    // Load reference sRGB profile
+//    cmsHPROFILE srgb = cmsCreate_sRGBProfile();
+//    if (!srgb) {
+//        printf("Could not create test sRGB profile\n");
+//        return false;
+//    }
+//    
+//    // Load lcms color profile
+//    cmsHPROFILE srcProfile = cmsOpenProfileFromMem(_data, static_cast<cmsUInt32Number>(_size));
+//    if (srcProfile == nullptr) {
+//        printf("Could not open ICC profile\n");
+//        return false;
+//    }
+//    
+//    // Must be RGB
+//    if (cmsGetColorSpace(srcProfile) != cmsSigRgbData) {
+//        cmsCloseProfile(srcProfile);
+//        cmsCloseProfile(srgb);
+//        return false;
+//    }
+//    
+//    
+//    
+//    // The colour profile is sRGB
+//    cmsCloseProfile(srcProfile);
+//    cmsCloseProfile(srgb);
+//    return true;
+//}
 
 
 LCMSColorProfile* fn_nullable LCMSColorProfileRetain(LCMSColorProfile* fn_nullable value) SWIFT_RETURNS_UNRETAINED {
