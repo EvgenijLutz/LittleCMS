@@ -242,10 +242,10 @@ void LCMSImageRelease(LCMSImage* fn_nullable container) {
 //
 
 LCMSImage* fn_nullable convertToLinearDCIP3(const char* fn_nonnull sourceData,
-                                                    long width, long height,
-                                                    long numComponents, long componentSize,
-                                                    bool isHDR,
-                                                    const char* fn_nullable iccData, long iccLength) {
+                                            long width, long height,
+                                            long numComponents, long componentSize,
+                                            bool isHDR,
+                                            const char* fn_nullable iccData, long iccLength) {
     if (width < 1) {
         printf("Invalid width: %ld\n", width);
         return nullptr;

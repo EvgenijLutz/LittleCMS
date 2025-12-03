@@ -53,8 +53,8 @@ public:
     const char* fn_nonnull getData() SWIFT_COMPUTED_PROPERTY { return _data; }
     long getSize() SWIFT_COMPUTED_PROPERTY { return _size; }
     
-    bool getIsLinear() SWIFT_COMPUTED_PROPERTY;
-    //bool getIsSRGB() SWIFT_COMPUTED_PROPERTY;
+    bool checkIsLinear();
+    bool checkIsSRGB();
 }
 SWIFT_SHARED_REFERENCE(LCMSColorProfileRetain, LCMSColorProfileRelease)
 SWIFT_UNCHECKED_SENDABLE;

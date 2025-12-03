@@ -111,6 +111,23 @@ struct tag_reader {
         return true;
     }
     
+    
+    template<typename TagType>
+    static TagType* fn_nullable readTag(cmsHPROFILE profile, cmsTagSignature name) {
+        if (cmsIsTag(profile, name) == false) {
+            return nullptr;
+        }
+        
+        auto tag = cmsReadTag(profile, name);
+        return reinterpret_cast<TagType*>(tag);
+    }
+    
+    
+    static cmsCIEXYZ* fn_nullable readLuminance(cmsHPROFILE profile) {
+        return readTag<cmsCIEXYZ>(profile, cmsSigLuminanceTag);
+    }
+    
+    
     static cmsToneCurve* fn_nullable readToneCurve(cmsHPROFILE profile, cmsTagSignature name) {
         if (cmsIsTag(profile, name) == false) {
             return nullptr;
@@ -135,7 +152,7 @@ LCMSColorProfile* fn_nullable LCMSColorProfile::createLinear(bool force) SWIFT_R
     // TODO: This method produces a different colour profile that messes up the colours even if this colour profile is already linear
     
     // Check if the colour profile is already linear
-    if (getIsLinear()) {
+    if (checkIsLinear()) {
         printf("Colour profile is already linear\n");
         
         if (force == false) {
@@ -239,7 +256,7 @@ LCMSColorProfile* fn_nullable LCMSColorProfile::createLinear(bool force) SWIFT_R
 }
 
 
-bool LCMSColorProfile::getIsLinear() {
+bool LCMSColorProfile::checkIsLinear() {
     // Load lcms color profile
     cmsHPROFILE srcProfile = cmsOpenProfileFromMem(_data, static_cast<cmsUInt32Number>(_size));
     if (srcProfile == nullptr) {
@@ -247,7 +264,7 @@ bool LCMSColorProfile::getIsLinear() {
         return false;
     }
     
-    // Getting TRCs / Tone Curves (gamma)
+    // Get TRCs / Tone Curves (gamma)
     auto redTRC = tag_reader::readToneCurve(srcProfile, cmsSigRedTRCTag);
     auto greenTRC = tag_reader::readToneCurve(srcProfile, cmsSigGreenTRCTag);
     auto blueTRC = tag_reader::readToneCurve(srcProfile, cmsSigBlueTRCTag);
@@ -325,6 +342,154 @@ bool LCMSColorProfile::getIsLinear() {
 //    cmsCloseProfile(srgb);
 //    return true;
 //}
+
+
+static bool nearlyEqual(float a, float b, float threshold = 0.00001) {
+    return std::abs(a - b) <= threshold;
+}
+
+
+bool LCMSColorProfile::checkIsSRGB() {
+    // Load lcms color profile
+    cmsHPROFILE srcProfile = cmsOpenProfileFromMem(_data, static_cast<cmsUInt32Number>(_size));
+    if (srcProfile == nullptr) {
+        printf("Could not open ICC profile\n");
+        return false;
+    }
+    
+    // Test 1 - check gamma
+    {
+        // Get tone curves
+        auto redTRC = tag_reader::readToneCurve(srcProfile, cmsSigRedTRCTag);
+        if (redTRC == nullptr) {
+            printf("Could not read red tone curve\n");
+            cmsCloseProfile(srcProfile);
+            return false;
+        }
+        
+        auto greenTRC = tag_reader::readToneCurve(srcProfile, cmsSigGreenTRCTag);
+        if (greenTRC == nullptr) {
+            printf("Could not read green tone curve\n");
+            cmsCloseProfile(srcProfile);
+            return false;
+        }
+        
+        auto blueTRC = tag_reader::readToneCurve(srcProfile, cmsSigBlueTRCTag);
+        if (blueTRC == nullptr) {
+            printf("Could not read blue tone curve\n");
+            cmsCloseProfile(srcProfile);
+            return false;
+        }
+        
+        //auto c = cmsGetToneCurveSegment(0, blueTRC);
+        
+        // sRGB gamma is about 2.2
+        auto rGamma = cmsEstimateGamma(redTRC, 0.1);
+        if (nearlyEqual(rGamma, 2.2017832637391117, 0.00001) == false) {
+            printf("Red channel gamma %.5f does not match sRGB gamma ~2.20178\n", rGamma);
+            cmsCloseProfile(srcProfile);
+            return false;
+        }
+        
+        auto gGamma = cmsEstimateGamma(greenTRC, 0.1);
+        if (nearlyEqual(gGamma, 2.2017832637391117, 0.00001) == false) {
+            printf("Green channel gamma %.5f does not match sRGB gamma ~2.20178\n", gGamma);
+            cmsCloseProfile(srcProfile);
+            return false;
+        }
+        
+        auto bGamma = cmsEstimateGamma(blueTRC, 0.1);
+        if (nearlyEqual(bGamma, 2.2017832637391117, 0.00001) == false) {
+            printf("Blue channel gamma %.5f does not match sRGB gamma ~2.20178\n", bGamma);
+            cmsCloseProfile(srcProfile);
+            return false;
+        }
+        
+        // Probably this is enough instead of checking every tone curve
+        auto gamma = cmsDetectRGBProfileGamma(srcProfile, 0.1);
+        if (nearlyEqual(gamma, 2.2017296101185178, 0.00001) == false) {
+            printf("Gamma %.5f does not match sRGB gamma ~2.20172\n", gamma);
+            cmsCloseProfile(srcProfile);
+            return false;
+        }
+    }
+    
+    
+    // Get white point
+    //cmsCIExyY whitePoint;
+    //if (tag_reader::read(srcProfile, whitePoint, cmsSigMediaWhitePointTag) == false) {
+    //    printf("Could not read white point tag\n");
+    //    cmsCloseProfile(srcProfile);
+    //    return false;
+    //}
+    //cmsFloat64Number temperature = 0;
+    //bool readTemperature = cmsTempFromWhitePoint(&temperature, &whitePoint);
+    
+    // Get luminance
+    //auto luminance = tag_reader::readLuminance(srcProfile);
+    //if (luminance == nullptr) {
+    //    printf("Could not read luminance tag\n");
+    //    cmsCloseProfile(srcProfile);
+    //    return false;
+    //}
+    
+    
+    // Test 2. Compare with sRGB primaries:
+    // https://www.color.org/chardata/rgb/srgb.xalter
+    {
+        // Get primaries - retrieve the XYZ colorants (rXYZ, gXYZ, bXYZ)
+        //cmsCIExyYTRIPLE primaries = { };
+        //if (tag_reader::read(srcProfile, primaries.Red, cmsSigRedColorantTag) == false) {
+        //    printf("Could not read red colorant tag\n");
+        //    cmsCloseProfile(srcProfile);
+        //    return false;
+        //}
+        //if (tag_reader::read(srcProfile, primaries.Green, cmsSigGreenColorantTag) == false) {
+        //    printf("Could not read green colorant tag\n");
+        //    cmsCloseProfile(srcProfile);
+        //    return false;
+        //}
+        //if (tag_reader::read(srcProfile, primaries.Blue, cmsSigBlueColorantTag) == false) {
+        //    printf("Could not read green colorant tag\n");
+        //    cmsCloseProfile(srcProfile);
+        //    return false;
+        //}
+        
+        auto chromacity = tag_reader::readTag<cmsCIExyYTRIPLE>(srcProfile, cmsSigChromaticityTag);
+        if (chromacity == nullptr) {
+            printf("Could not read chromacity tag\n");
+            cmsCloseProfile(srcProfile);
+            return false;
+        }
+        
+        if (
+            nearlyEqual(chromacity->Red.x, 0.64) == false ||
+            nearlyEqual(chromacity->Red.y, 0.33) == false ||
+            //nearlyEqual(chromacity->Red.Y, 0.03) == false ||
+            nearlyEqual(chromacity->Red.Y, 1) == false ||
+            
+            nearlyEqual(chromacity->Green.x, 0.30) == false ||
+            nearlyEqual(chromacity->Green.y, 0.60) == false ||
+            //nearlyEqual(chromacity->Green.Y, 0.10) == false ||
+            nearlyEqual(chromacity->Green.Y, 1) == false ||
+            
+            nearlyEqual(chromacity->Blue.x, 0.15) == false ||
+            nearlyEqual(chromacity->Blue.y, 0.06) == false ||
+            //nearlyEqual(chromacity->Blue.Y, 0.79) == false
+            nearlyEqual(chromacity->Blue.Y, 1) == false
+            ) {
+                printf("Colour primaries do not match sRGB primaries\n");
+                cmsCloseProfile(srcProfile);
+                return false;
+            }
+    }
+    
+    // Clean up
+    cmsCloseProfile(srcProfile);
+    
+    // It's very likely that it's an sRGB colour profile
+    return true;
+}
 
 
 LCMSColorProfile* fn_nullable LCMSColorProfileRetain(LCMSColorProfile* fn_nullable value) SWIFT_RETURNS_UNRETAINED {
