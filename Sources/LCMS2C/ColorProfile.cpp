@@ -9,6 +9,49 @@
 #include <lcms2.h>
 
 
+struct tag_reader {
+    static bool read(cmsHPROFILE profile, cmsCIExyY& component, cmsTagSignature name) {
+        if (cmsIsTag(profile, name) == false) {
+            return false;
+        }
+        
+        auto tag = cmsReadTag(profile, name);
+        if (tag == nullptr) {
+            return false;
+        }
+        
+        component = *reinterpret_cast<cmsCIExyY*>(tag);
+        return true;
+    }
+    
+    
+    template<typename TagType>
+    static TagType* fn_nullable readTag(cmsHPROFILE profile, cmsTagSignature name) {
+        if (cmsIsTag(profile, name) == false) {
+            return nullptr;
+        }
+        
+        auto tag = cmsReadTag(profile, name);
+        return reinterpret_cast<TagType*>(tag);
+    }
+    
+    
+    static cmsCIEXYZ* fn_nullable readLuminance(cmsHPROFILE profile) {
+        return readTag<cmsCIEXYZ>(profile, cmsSigLuminanceTag);
+    }
+    
+    
+    static cmsToneCurve* fn_nullable readToneCurve(cmsHPROFILE profile, cmsTagSignature name) {
+        if (cmsIsTag(profile, name) == false) {
+            return nullptr;
+        }
+        
+        auto tag = cmsReadTag(profile, name);
+        return reinterpret_cast<cmsToneCurve*>(tag);
+    }
+};
+
+
 static char* fn_nonnull copyData(const void* fn_nonnull source fn_noescape, long size) {
     auto copy = new char[size];
     std::memcpy(copy, source, size);
@@ -16,11 +59,52 @@ static char* fn_nonnull copyData(const void* fn_nonnull source fn_noescape, long
 }
 
 
-LCMSColorProfile::LCMSColorProfile(const char* fn_nonnull data fn_noescape, long size):
+LCMSColorProfile::LCMSColorProfile(const char* fn_nonnull data, long size):
 _referenceCounter(1),
 _data(data),
 _size(size) {
-    //
+#if DEBUG
+    // Load lcms color profile
+    cmsHPROFILE profile = cmsOpenProfileFromMem(_data, static_cast<cmsUInt32Number>(_size));
+    if (profile == nullptr) {
+        printf("Could not open ICC profile\n");
+        return;
+    }
+    
+    wchar_t name[512];
+    auto bytes = cmsGetProfileInfo(profile, cmsInfoDescription, cmsNoLanguage, cmsNoCountry, name, 512);
+    if (bytes) {
+        wcstombs(_name, name, 512);
+        printf("Colour profile description: \"%s\"\n", _name);
+    }
+    else {
+        _name[0] = 0;
+        printf("Could not get colour profile description\n");
+    }
+    
+    
+//    auto names = tag_reader::readTag<cmsNAMEDCOLORLIST>(profile, cmsSigNamedColor2Tag);
+//    if (names == nullptr) {
+//        printf("Colour profile has no name tag\n");
+//        return;
+//    }
+//    
+//    auto numNames = cmsNamedColorCount(names);
+//    for (auto i = 0; i < numNames; i++) {
+//        char name[256];
+//        char prefix[33];
+//        char suffix[33];
+//        auto success = cmsNamedColorInfo(names, i, name, prefix, suffix, nullptr, nullptr);
+//        if (success) {
+//            printf("Name #%d:\"%s\", prefix: \"%s\", suffix: \"%s\"\n", i, name, prefix, suffix);
+//        }
+//        else {
+//            printf("Could not read name #%d\n", i);
+//        }
+//    }
+    
+    cmsCloseProfile(profile);
+#endif
 }
 
 
@@ -94,49 +178,6 @@ LCMSColorProfile* fn_nonnull LCMSColorProfile::createDCIP3D65() SWIFT_RETURNS_RE
     
     return create(dciP3D65Data, sizeof(dciP3D65Data));
 }
-
-
-struct tag_reader {
-    static bool read(cmsHPROFILE profile, cmsCIExyY& component, cmsTagSignature name) {
-        if (cmsIsTag(profile, name) == false) {
-            return false;
-        }
-        
-        auto tag = cmsReadTag(profile, name);
-        if (tag == nullptr) {
-            return false;
-        }
-        
-        component = *reinterpret_cast<cmsCIExyY*>(tag);
-        return true;
-    }
-    
-    
-    template<typename TagType>
-    static TagType* fn_nullable readTag(cmsHPROFILE profile, cmsTagSignature name) {
-        if (cmsIsTag(profile, name) == false) {
-            return nullptr;
-        }
-        
-        auto tag = cmsReadTag(profile, name);
-        return reinterpret_cast<TagType*>(tag);
-    }
-    
-    
-    static cmsCIEXYZ* fn_nullable readLuminance(cmsHPROFILE profile) {
-        return readTag<cmsCIEXYZ>(profile, cmsSigLuminanceTag);
-    }
-    
-    
-    static cmsToneCurve* fn_nullable readToneCurve(cmsHPROFILE profile, cmsTagSignature name) {
-        if (cmsIsTag(profile, name) == false) {
-            return nullptr;
-        }
-        
-        auto tag = cmsReadTag(profile, name);
-        return reinterpret_cast<cmsToneCurve*>(tag);
-    }
-};
 
 
 LCMSColorProfile* fn_nullable LCMSColorProfile::createLinear(bool force) SWIFT_RETURNS_RETAINED {

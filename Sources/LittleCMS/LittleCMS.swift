@@ -30,6 +30,12 @@ public extension LCMSColorProfile {
         
         return colorProfile
     }
+    
+    var name: String {
+        let _name = __getNameUnsafe()
+        let string = String(cString: _name)
+        return string
+    }
 }
 
 

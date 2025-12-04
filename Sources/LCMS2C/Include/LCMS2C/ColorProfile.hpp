@@ -17,11 +17,13 @@
 /// - Seealso: [International Color Consortium](https://www.color.org/index.xalter)
 class LCMSColorProfile final {
 private:
+    char _name[512];
+    
     std::atomic<size_t> _referenceCounter;
     const char* fn_nonnull _data;
     long _size;
     
-    LCMSColorProfile(const char* fn_nonnull data fn_noescape, long size);
+    LCMSColorProfile(const char* fn_nonnull data, long size);
     ~LCMSColorProfile();
     
     friend LCMSColorProfile* fn_nullable LCMSColorProfileRetain(LCMSColorProfile* fn_nullable value) SWIFT_RETURNS_UNRETAINED;
@@ -50,7 +52,9 @@ public:
     
     LCMSColorProfile* fn_nullable createLinear(bool force = true) SWIFT_RETURNS_RETAINED SWIFT_NAME(createLinear(force:));
     
-    const char* fn_nonnull getData() SWIFT_COMPUTED_PROPERTY { return _data; }
+    const char* fn_nonnull getName() fn_lifetimebound SWIFT_NAME(__getNameUnsafe()) { return _name; }
+    
+    const char* fn_nonnull getData() fn_lifetimebound SWIFT_COMPUTED_PROPERTY { return _data; }
     long getSize() SWIFT_COMPUTED_PROPERTY { return _size; }
     
     bool checkIsLinear();

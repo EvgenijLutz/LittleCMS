@@ -63,9 +63,10 @@ struct ComponentConverter {
 };
 
 
-LCMSImage::LCMSImage(char* fn_nonnull data, long width, long height, long numComponents, long componentSize, bool isHDR, LCMSColorProfile* fn_nullable colorProfile):
+LCMSImage::LCMSImage(char* fn_nonnull data, bool borrowingData, long width, long height, long numComponents, long componentSize, bool isHDR, LCMSColorProfile* fn_nullable colorProfile):
 _referenceCounter(1),
 _data(data),
+_borrowingData(borrowingData),
 _width(width),
 _height(height),
 _numComponents(numComponents),
@@ -77,18 +78,55 @@ _colorProfile(colorProfile) {
 
 LCMSImage::~LCMSImage() {
     //printf("Destroy LCMSImage\n");
-    delete [] _data;
+    if (_borrowingData == false) {
+        delete [] _data;
+    }
     LCMSColorProfileRelease(_colorProfile);
 }
 
 
 LCMSImage* fn_nullable LCMSImage::create(const char* fn_nonnull data, long width, long height, long numComponents, long componentSize, bool isHDR, LCMSColorProfile* fn_nullable colorProfile) {
-    // TODO: Perform sanity checks
+    // Invalid size
+    if (width < 1 || height < 1) {
+        return nullptr;
+    }
+    
+    // Invalid number of components
+    if (numComponents < 1 || numComponents > 4) {
+        return nullptr;
+    }
+    
+    // Invalid component size
+    if (componentSize != 1 && componentSize != 2 && componentSize != 4) {
+        return nullptr;
+    }
+    
+    // Copy memory
     auto dataSize = width * height * numComponents * componentSize;
     auto dataCopy = new char[dataSize];
     memcpy(dataCopy, data, dataSize);
     
-    return new LCMSImage(dataCopy, width, height, numComponents, componentSize, isHDR, LCMSColorProfileRetain(colorProfile));
+    return new LCMSImage(dataCopy, false, width, height, numComponents, componentSize, isHDR, LCMSColorProfileRetain(colorProfile));
+}
+
+
+LCMSImage* fn_nullable LCMSImage::createBorrowing(char* fn_nonnull data, long width, long height, long numComponents, long componentSize, bool isHDR, LCMSColorProfile* fn_nullable colorProfile) {
+    // Invalid size
+    if (width < 1 || height < 1) {
+        return nullptr;
+    }
+    
+    // Invalid number of components
+    if (numComponents < 1 || numComponents > 4) {
+        return nullptr;
+    }
+    
+    // Invalid component size
+    if (componentSize != 1 && componentSize != 2 && componentSize != 4) {
+        return nullptr;
+    }
+    
+    return new LCMSImage(data, true, width, height, numComponents, componentSize, isHDR, LCMSColorProfileRetain(colorProfile));
 }
 
 
