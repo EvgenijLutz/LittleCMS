@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------------
 //
 //  Little Color Management System
-//  Copyright (c) 1998-2025 Marti Maria Saguer
+//  Copyright (c) 1998-2026 Marti Maria Saguer
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the "Software"),
@@ -23,7 +23,7 @@
 //
 //---------------------------------------------------------------------------------
 //
-// Version 2.17
+// Version 2.18
 //
 
 #ifndef _lcms2_H
@@ -46,7 +46,7 @@
 // #define CMS_USE_PROFILE_BLACK_POINT_TAG    1
 
 // Uncomment this line if you are compiling as C++ and want a C++ API
-//#define CMS_USE_CPP_API
+// #define CMS_USE_CPP_API
 
 // Uncomment this line if you need strict CGATS syntax. Makes CGATS files to
 // require "KEYWORD" on undefined identifiers, keep it commented out unless needed
@@ -62,7 +62,7 @@
 // #define CMS_RELY_ON_WINDOWS_STATIC_MUTEX_INIT
 
 // Uncomment this to remove the "register" storage class
-//#define CMS_NO_REGISTER_KEYWORD 1
+// #define CMS_NO_REGISTER_KEYWORD 1
 
 // Uncomment this to remove visibility attribute when building shared objects
 // #define CMS_NO_VISIBILITY 1
@@ -87,7 +87,7 @@ extern "C" {
 #endif
 
 // Version/release
-#define LCMS_VERSION        2170
+#define LCMS_VERSION        2180
 
 // I will give the chance of redefining basic types for compilers that are not fully C99 compliant
 #ifndef CMS_BASIC_TYPES_ALREADY_DEFINED

@@ -9,7 +9,7 @@
 # Define some global variables
 platforms_path='/Applications/Xcode.app/Contents/Developer/Platforms'
 # Your signing identity to sign the xcframework. Execute "security find-identity -v -p codesigning" and select one from the list
-identity=B42A10624E8E06BC95CD03069100C6E67121D61B
+identity=070BA25D98F2A17A61E3E27E31BE64C06F901016
 
 
 # Console output formatting

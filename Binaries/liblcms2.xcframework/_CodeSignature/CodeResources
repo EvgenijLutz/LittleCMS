@@ -6,11 +6,11 @@
 	<dict>
 		<key>ios-arm64/Headers/lcms2.h</key>
 		<data>
-		0wxkmyyNqewvK5RobQHSnGzoFUU=
+		kKanlJwKTDkxUg2isvjcyHOcVdo=
 		</data>
 		<key>ios-arm64/Headers/lcms2_plugin.h</key>
 		<data>
-		svi969fKoocCL8L/Bcw5dKsHN2I=
+		GjG1FGZ5OrJ0QhA2twY925VBvvc=
 		</data>
 		<key>ios-arm64/Headers/liblcms2-Module/module.modulemap</key>
 		<data>
@@ -18,15 +18,15 @@
 		</data>
 		<key>ios-arm64/liblcms2.a</key>
 		<data>
-		Ysk0z9YA2aU+QSNPik3Y2q0cGro=
+		Ngl1c0+N/7SrT3m+oCvD5pBwrUQ=
 		</data>
 		<key>ios-arm64_x86_64-simulator/Headers/lcms2.h</key>
 		<data>
-		0wxkmyyNqewvK5RobQHSnGzoFUU=
+		kKanlJwKTDkxUg2isvjcyHOcVdo=
 		</data>
 		<key>ios-arm64_x86_64-simulator/Headers/lcms2_plugin.h</key>
 		<data>
-		svi969fKoocCL8L/Bcw5dKsHN2I=
+		GjG1FGZ5OrJ0QhA2twY925VBvvc=
 		</data>
 		<key>ios-arm64_x86_64-simulator/Headers/liblcms2-Module/module.modulemap</key>
 		<data>
@@ -34,15 +34,15 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/liblcms2.a</key>
 		<data>
-		F8cHSsx5TFjeu096/2xPI84ewcs=
+		OE+h2/CujDU3iePx80j4spKBDBQ=
 		</data>
 		<key>macos-arm64_x86_64/Headers/lcms2.h</key>
 		<data>
-		0wxkmyyNqewvK5RobQHSnGzoFUU=
+		kKanlJwKTDkxUg2isvjcyHOcVdo=
 		</data>
 		<key>macos-arm64_x86_64/Headers/lcms2_plugin.h</key>
 		<data>
-		svi969fKoocCL8L/Bcw5dKsHN2I=
+		GjG1FGZ5OrJ0QhA2twY925VBvvc=
 		</data>
 		<key>macos-arm64_x86_64/Headers/liblcms2-Module/module.modulemap</key>
 		<data>
@@ -50,15 +50,15 @@
 		</data>
 		<key>macos-arm64_x86_64/liblcms2.a</key>
 		<data>
-		mggq67RUfjGElxlUrnKbUaX7de4=
+		BJ/WpAdJ9KNTE7cGfJ6jxApzPpE=
 		</data>
 		<key>tvos-arm64/Headers/lcms2.h</key>
 		<data>
-		0wxkmyyNqewvK5RobQHSnGzoFUU=
+		kKanlJwKTDkxUg2isvjcyHOcVdo=
 		</data>
 		<key>tvos-arm64/Headers/lcms2_plugin.h</key>
 		<data>
-		svi969fKoocCL8L/Bcw5dKsHN2I=
+		GjG1FGZ5OrJ0QhA2twY925VBvvc=
 		</data>
 		<key>tvos-arm64/Headers/liblcms2-Module/module.modulemap</key>
 		<data>
@@ -66,15 +66,15 @@
 		</data>
 		<key>tvos-arm64/liblcms2.a</key>
 		<data>
-		U2D4+2q9Ci6umU8eMCkt+wCcD1c=
+		W871NaghphYS4cYaOIyd6WG5w9E=
 		</data>
 		<key>tvos-arm64_x86_64-simulator/Headers/lcms2.h</key>
 		<data>
-		0wxkmyyNqewvK5RobQHSnGzoFUU=
+		kKanlJwKTDkxUg2isvjcyHOcVdo=
 		</data>
 		<key>tvos-arm64_x86_64-simulator/Headers/lcms2_plugin.h</key>
 		<data>
-		svi969fKoocCL8L/Bcw5dKsHN2I=
+		GjG1FGZ5OrJ0QhA2twY925VBvvc=
 		</data>
 		<key>tvos-arm64_x86_64-simulator/Headers/liblcms2-Module/module.modulemap</key>
 		<data>
@@ -82,15 +82,15 @@
 		</data>
 		<key>tvos-arm64_x86_64-simulator/liblcms2.a</key>
 		<data>
-		SFfMzRuVOgJG5MRIm1ZoFXJ7FZ8=
+		O6WkqZo4iJWvLeHX4jyI/60/e2A=
 		</data>
 		<key>watchos-arm64/Headers/lcms2.h</key>
 		<data>
-		0wxkmyyNqewvK5RobQHSnGzoFUU=
+		kKanlJwKTDkxUg2isvjcyHOcVdo=
 		</data>
 		<key>watchos-arm64/Headers/lcms2_plugin.h</key>
 		<data>
-		svi969fKoocCL8L/Bcw5dKsHN2I=
+		GjG1FGZ5OrJ0QhA2twY925VBvvc=
 		</data>
 		<key>watchos-arm64/Headers/liblcms2-Module/module.modulemap</key>
 		<data>
@@ -98,15 +98,15 @@
 		</data>
 		<key>watchos-arm64/liblcms2.a</key>
 		<data>
-		MVx3m21TvE3Up+t5WGlDMLqcIN8=
+		HmOfc/lJKH8zjjggQB/32MRru5I=
 		</data>
 		<key>watchos-arm64_x86_64-simulator/Headers/lcms2.h</key>
 		<data>
-		0wxkmyyNqewvK5RobQHSnGzoFUU=
+		kKanlJwKTDkxUg2isvjcyHOcVdo=
 		</data>
 		<key>watchos-arm64_x86_64-simulator/Headers/lcms2_plugin.h</key>
 		<data>
-		svi969fKoocCL8L/Bcw5dKsHN2I=
+		GjG1FGZ5OrJ0QhA2twY925VBvvc=
 		</data>
 		<key>watchos-arm64_x86_64-simulator/Headers/liblcms2-Module/module.modulemap</key>
 		<data>
@@ -114,15 +114,15 @@
 		</data>
 		<key>watchos-arm64_x86_64-simulator/liblcms2.a</key>
 		<data>
-		aBICQ7kc+G5sDZ8Yd/y/tDgKqTs=
+		kVr0c91pXPXGFoAS5VMh9CFJEJ8=
 		</data>
 		<key>xros-arm64/Headers/lcms2.h</key>
 		<data>
-		0wxkmyyNqewvK5RobQHSnGzoFUU=
+		kKanlJwKTDkxUg2isvjcyHOcVdo=
 		</data>
 		<key>xros-arm64/Headers/lcms2_plugin.h</key>
 		<data>
-		svi969fKoocCL8L/Bcw5dKsHN2I=
+		GjG1FGZ5OrJ0QhA2twY925VBvvc=
 		</data>
 		<key>xros-arm64/Headers/liblcms2-Module/module.modulemap</key>
 		<data>
@@ -130,15 +130,15 @@
 		</data>
 		<key>xros-arm64/liblcms2.a</key>
 		<data>
-		9ja05dWXSec1pmld9UQd1GTTVp4=
+		iq16m6i2ylcoAgfSVKmWtHz+K3w=
 		</data>
 		<key>xros-arm64_x86_64-simulator/Headers/lcms2.h</key>
 		<data>
-		0wxkmyyNqewvK5RobQHSnGzoFUU=
+		kKanlJwKTDkxUg2isvjcyHOcVdo=
 		</data>
 		<key>xros-arm64_x86_64-simulator/Headers/lcms2_plugin.h</key>
 		<data>
-		svi969fKoocCL8L/Bcw5dKsHN2I=
+		GjG1FGZ5OrJ0QhA2twY925VBvvc=
 		</data>
 		<key>xros-arm64_x86_64-simulator/Headers/liblcms2-Module/module.modulemap</key>
 		<data>
@@ -146,39 +146,27 @@
 		</data>
 		<key>xros-arm64_x86_64-simulator/liblcms2.a</key>
 		<data>
-		OonHd/S9INUb/ylDqvDPGiygWag=
+		clZdwFVZqgozV11E4/rAGxOHvc4=
 		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
 		<key>ios-arm64/Headers/lcms2.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			0wxkmyyNqewvK5RobQHSnGzoFUU=
-			</data>
 			<key>hash2</key>
 			<data>
-			CPvgG4ACth7hZnzIotaOFrZG0njHNxyMyE4VwQOLW2U=
+			R17V9dOEO5BY6SgQd06XqjRgL1A4OYrp1sF7ptEY5Ts=
 			</data>
 		</dict>
 		<key>ios-arm64/Headers/lcms2_plugin.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			svi969fKoocCL8L/Bcw5dKsHN2I=
-			</data>
 			<key>hash2</key>
 			<data>
-			5A7Nsh2lxVjELQ4HtxS02n+cI2QaoLHPrsqBskt/4I4=
+			+CJIBCDiI3785bnLT2Tl2yzymeLljk4KJfyJmmGjzGM=
 			</data>
 		</dict>
 		<key>ios-arm64/Headers/liblcms2-Module/module.modulemap</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			APQtAZ3JFm3TDdormd0OpDMylgU=
-			</data>
 			<key>hash2</key>
 			<data>
 			AlVuCd7Vvalzpp9mgdUb4WC82a1sJ321citAgVhCATU=
@@ -186,43 +174,27 @@
 		</dict>
 		<key>ios-arm64/liblcms2.a</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			Ysk0z9YA2aU+QSNPik3Y2q0cGro=
-			</data>
 			<key>hash2</key>
 			<data>
-			ni7Kqn+QQO8eOwNg2Yg27tTi6DMNEr9DNyuTpa61D+s=
+			LrIDAFo0KA7Hvuhr4orIfncm7trXg+RnsUpoxDjyaY8=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/Headers/lcms2.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			0wxkmyyNqewvK5RobQHSnGzoFUU=
-			</data>
 			<key>hash2</key>
 			<data>
-			CPvgG4ACth7hZnzIotaOFrZG0njHNxyMyE4VwQOLW2U=
+			R17V9dOEO5BY6SgQd06XqjRgL1A4OYrp1sF7ptEY5Ts=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/Headers/lcms2_plugin.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			svi969fKoocCL8L/Bcw5dKsHN2I=
-			</data>
 			<key>hash2</key>
 			<data>
-			5A7Nsh2lxVjELQ4HtxS02n+cI2QaoLHPrsqBskt/4I4=
+			+CJIBCDiI3785bnLT2Tl2yzymeLljk4KJfyJmmGjzGM=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/Headers/liblcms2-Module/module.modulemap</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			APQtAZ3JFm3TDdormd0OpDMylgU=
-			</data>
 			<key>hash2</key>
 			<data>
 			AlVuCd7Vvalzpp9mgdUb4WC82a1sJ321citAgVhCATU=
@@ -230,43 +202,27 @@
 		</dict>
 		<key>ios-arm64_x86_64-simulator/liblcms2.a</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			F8cHSsx5TFjeu096/2xPI84ewcs=
-			</data>
 			<key>hash2</key>
 			<data>
-			UIWcLBjf4j13NjI0ny+xDMfnAyQB5bGQoQWZxXUCmYY=
+			C7vlMYj+NrejbfIrBOeCXjcuCKbB+bk9xVl3XtgxPBI=
 			</data>
 		</dict>
 		<key>macos-arm64_x86_64/Headers/lcms2.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			0wxkmyyNqewvK5RobQHSnGzoFUU=
-			</data>
 			<key>hash2</key>
 			<data>
-			CPvgG4ACth7hZnzIotaOFrZG0njHNxyMyE4VwQOLW2U=
+			R17V9dOEO5BY6SgQd06XqjRgL1A4OYrp1sF7ptEY5Ts=
 			</data>
 		</dict>
 		<key>macos-arm64_x86_64/Headers/lcms2_plugin.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			svi969fKoocCL8L/Bcw5dKsHN2I=
-			</data>
 			<key>hash2</key>
 			<data>
-			5A7Nsh2lxVjELQ4HtxS02n+cI2QaoLHPrsqBskt/4I4=
+			+CJIBCDiI3785bnLT2Tl2yzymeLljk4KJfyJmmGjzGM=
 			</data>
 		</dict>
 		<key>macos-arm64_x86_64/Headers/liblcms2-Module/module.modulemap</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			APQtAZ3JFm3TDdormd0OpDMylgU=
-			</data>
 			<key>hash2</key>
 			<data>
 			AlVuCd7Vvalzpp9mgdUb4WC82a1sJ321citAgVhCATU=
@@ -274,43 +230,27 @@
 		</dict>
 		<key>macos-arm64_x86_64/liblcms2.a</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			mggq67RUfjGElxlUrnKbUaX7de4=
-			</data>
 			<key>hash2</key>
 			<data>
-			zkU3jlaRJa2g5+z2AqkrchWo6usGmRa1nXOTmDFbsxY=
+			vV1tQxiNsDePx5Fs/iNUF8UcUNK8hc6fE1YdFtgSCVU=
 			</data>
 		</dict>
 		<key>tvos-arm64/Headers/lcms2.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			0wxkmyyNqewvK5RobQHSnGzoFUU=
-			</data>
 			<key>hash2</key>
 			<data>
-			CPvgG4ACth7hZnzIotaOFrZG0njHNxyMyE4VwQOLW2U=
+			R17V9dOEO5BY6SgQd06XqjRgL1A4OYrp1sF7ptEY5Ts=
 			</data>
 		</dict>
 		<key>tvos-arm64/Headers/lcms2_plugin.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			svi969fKoocCL8L/Bcw5dKsHN2I=
-			</data>
 			<key>hash2</key>
 			<data>
-			5A7Nsh2lxVjELQ4HtxS02n+cI2QaoLHPrsqBskt/4I4=
+			+CJIBCDiI3785bnLT2Tl2yzymeLljk4KJfyJmmGjzGM=
 			</data>
 		</dict>
 		<key>tvos-arm64/Headers/liblcms2-Module/module.modulemap</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			APQtAZ3JFm3TDdormd0OpDMylgU=
-			</data>
 			<key>hash2</key>
 			<data>
 			AlVuCd7Vvalzpp9mgdUb4WC82a1sJ321citAgVhCATU=
@@ -318,43 +258,27 @@
 		</dict>
 		<key>tvos-arm64/liblcms2.a</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			U2D4+2q9Ci6umU8eMCkt+wCcD1c=
-			</data>
 			<key>hash2</key>
 			<data>
-			+t+XBhgpcLnHXqH7yRWszIVezxofrPuc94N4DOm1OdU=
+			Y9AT/cXdoN1nFXFEq4EvDFZJIQiHmUvUAHd2OX7mMCs=
 			</data>
 		</dict>
 		<key>tvos-arm64_x86_64-simulator/Headers/lcms2.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			0wxkmyyNqewvK5RobQHSnGzoFUU=
-			</data>
 			<key>hash2</key>
 			<data>
-			CPvgG4ACth7hZnzIotaOFrZG0njHNxyMyE4VwQOLW2U=
+			R17V9dOEO5BY6SgQd06XqjRgL1A4OYrp1sF7ptEY5Ts=
 			</data>
 		</dict>
 		<key>tvos-arm64_x86_64-simulator/Headers/lcms2_plugin.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			svi969fKoocCL8L/Bcw5dKsHN2I=
-			</data>
 			<key>hash2</key>
 			<data>
-			5A7Nsh2lxVjELQ4HtxS02n+cI2QaoLHPrsqBskt/4I4=
+			+CJIBCDiI3785bnLT2Tl2yzymeLljk4KJfyJmmGjzGM=
 			</data>
 		</dict>
 		<key>tvos-arm64_x86_64-simulator/Headers/liblcms2-Module/module.modulemap</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			APQtAZ3JFm3TDdormd0OpDMylgU=
-			</data>
 			<key>hash2</key>
 			<data>
 			AlVuCd7Vvalzpp9mgdUb4WC82a1sJ321citAgVhCATU=
@@ -362,43 +286,27 @@
 		</dict>
 		<key>tvos-arm64_x86_64-simulator/liblcms2.a</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			SFfMzRuVOgJG5MRIm1ZoFXJ7FZ8=
-			</data>
 			<key>hash2</key>
 			<data>
-			J8e6wOKSdIwi534R4wk6eQs6tqSJ19yvoH93jSXASzU=
+			Ss8lT0VdBRAwKLnY5HHRJzuGn4kZKyiEXYFOlcQmmX4=
 			</data>
 		</dict>
 		<key>watchos-arm64/Headers/lcms2.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			0wxkmyyNqewvK5RobQHSnGzoFUU=
-			</data>
 			<key>hash2</key>
 			<data>
-			CPvgG4ACth7hZnzIotaOFrZG0njHNxyMyE4VwQOLW2U=
+			R17V9dOEO5BY6SgQd06XqjRgL1A4OYrp1sF7ptEY5Ts=
 			</data>
 		</dict>
 		<key>watchos-arm64/Headers/lcms2_plugin.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			svi969fKoocCL8L/Bcw5dKsHN2I=
-			</data>
 			<key>hash2</key>
 			<data>
-			5A7Nsh2lxVjELQ4HtxS02n+cI2QaoLHPrsqBskt/4I4=
+			+CJIBCDiI3785bnLT2Tl2yzymeLljk4KJfyJmmGjzGM=
 			</data>
 		</dict>
 		<key>watchos-arm64/Headers/liblcms2-Module/module.modulemap</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			APQtAZ3JFm3TDdormd0OpDMylgU=
-			</data>
 			<key>hash2</key>
 			<data>
 			AlVuCd7Vvalzpp9mgdUb4WC82a1sJ321citAgVhCATU=
@@ -406,43 +314,27 @@
 		</dict>
 		<key>watchos-arm64/liblcms2.a</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			MVx3m21TvE3Up+t5WGlDMLqcIN8=
-			</data>
 			<key>hash2</key>
 			<data>
-			krc0865Bc5bS+UlmPi6wO77HWjiMYGoklZHTtzwS2ZI=
+			8YdHI+5eLu/x3dCP3+hPL7UXoeo0gReuWGKoxmtauyQ=
 			</data>
 		</dict>
 		<key>watchos-arm64_x86_64-simulator/Headers/lcms2.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			0wxkmyyNqewvK5RobQHSnGzoFUU=
-			</data>
 			<key>hash2</key>
 			<data>
-			CPvgG4ACth7hZnzIotaOFrZG0njHNxyMyE4VwQOLW2U=
+			R17V9dOEO5BY6SgQd06XqjRgL1A4OYrp1sF7ptEY5Ts=
 			</data>
 		</dict>
 		<key>watchos-arm64_x86_64-simulator/Headers/lcms2_plugin.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			svi969fKoocCL8L/Bcw5dKsHN2I=
-			</data>
 			<key>hash2</key>
 			<data>
-			5A7Nsh2lxVjELQ4HtxS02n+cI2QaoLHPrsqBskt/4I4=
+			+CJIBCDiI3785bnLT2Tl2yzymeLljk4KJfyJmmGjzGM=
 			</data>
 		</dict>
 		<key>watchos-arm64_x86_64-simulator/Headers/liblcms2-Module/module.modulemap</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			APQtAZ3JFm3TDdormd0OpDMylgU=
-			</data>
 			<key>hash2</key>
 			<data>
 			AlVuCd7Vvalzpp9mgdUb4WC82a1sJ321citAgVhCATU=
@@ -450,43 +342,27 @@
 		</dict>
 		<key>watchos-arm64_x86_64-simulator/liblcms2.a</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			aBICQ7kc+G5sDZ8Yd/y/tDgKqTs=
-			</data>
 			<key>hash2</key>
 			<data>
-			ps/bfBfk+GlFdI7wX/eqzIqVzQPNKTzQ9W0ftMhJO58=
+			lSGJJ5cs3lnsifOCriqMFA+7Rb0qKEdyzGe4DKXn8Co=
 			</data>
 		</dict>
 		<key>xros-arm64/Headers/lcms2.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			0wxkmyyNqewvK5RobQHSnGzoFUU=
-			</data>
 			<key>hash2</key>
 			<data>
-			CPvgG4ACth7hZnzIotaOFrZG0njHNxyMyE4VwQOLW2U=
+			R17V9dOEO5BY6SgQd06XqjRgL1A4OYrp1sF7ptEY5Ts=
 			</data>
 		</dict>
 		<key>xros-arm64/Headers/lcms2_plugin.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			svi969fKoocCL8L/Bcw5dKsHN2I=
-			</data>
 			<key>hash2</key>
 			<data>
-			5A7Nsh2lxVjELQ4HtxS02n+cI2QaoLHPrsqBskt/4I4=
+			+CJIBCDiI3785bnLT2Tl2yzymeLljk4KJfyJmmGjzGM=
 			</data>
 		</dict>
 		<key>xros-arm64/Headers/liblcms2-Module/module.modulemap</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			APQtAZ3JFm3TDdormd0OpDMylgU=
-			</data>
 			<key>hash2</key>
 			<data>
 			AlVuCd7Vvalzpp9mgdUb4WC82a1sJ321citAgVhCATU=
@@ -494,43 +370,27 @@
 		</dict>
 		<key>xros-arm64/liblcms2.a</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			9ja05dWXSec1pmld9UQd1GTTVp4=
-			</data>
 			<key>hash2</key>
 			<data>
-			DbXwNJMLeFhJpWxc6v+EryAA6sShaYOEFQ19qx0ie0g=
+			PoK/9JO9DcV3utPBEl8mainQ1MUJYGRHFgShu1eAqZY=
 			</data>
 		</dict>
 		<key>xros-arm64_x86_64-simulator/Headers/lcms2.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			0wxkmyyNqewvK5RobQHSnGzoFUU=
-			</data>
 			<key>hash2</key>
 			<data>
-			CPvgG4ACth7hZnzIotaOFrZG0njHNxyMyE4VwQOLW2U=
+			R17V9dOEO5BY6SgQd06XqjRgL1A4OYrp1sF7ptEY5Ts=
 			</data>
 		</dict>
 		<key>xros-arm64_x86_64-simulator/Headers/lcms2_plugin.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			svi969fKoocCL8L/Bcw5dKsHN2I=
-			</data>
 			<key>hash2</key>
 			<data>
-			5A7Nsh2lxVjELQ4HtxS02n+cI2QaoLHPrsqBskt/4I4=
+			+CJIBCDiI3785bnLT2Tl2yzymeLljk4KJfyJmmGjzGM=
 			</data>
 		</dict>
 		<key>xros-arm64_x86_64-simulator/Headers/liblcms2-Module/module.modulemap</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			APQtAZ3JFm3TDdormd0OpDMylgU=
-			</data>
 			<key>hash2</key>
 			<data>
 			AlVuCd7Vvalzpp9mgdUb4WC82a1sJ321citAgVhCATU=
@@ -538,13 +398,9 @@
 		</dict>
 		<key>xros-arm64_x86_64-simulator/liblcms2.a</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			OonHd/S9INUb/ylDqvDPGiygWag=
-			</data>
 			<key>hash2</key>
 			<data>
-			Dt3LkF1ncN9tWJNPLO2xDqt7gNiK7b5mULHDvMUCmzc=
+			j5v5FHUHPULVEA8y/ya95TyeU4Hai+nx8yIDf1U8rRU=
 			</data>
 		</dict>
 	</dict>
