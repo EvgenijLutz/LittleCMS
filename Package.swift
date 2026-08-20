@@ -24,6 +24,10 @@ let package = Package(
             targets: ["LCMS2C"]
         ),
         .library(
+            name: "liblcms2_c",
+            targets: ["liblcms2_c"]
+        ),
+        .library(
             name: "liblcms2",
             targets: ["liblcms2"]
         ),
@@ -32,6 +36,18 @@ let package = Package(
         .binaryTarget(
             name: "liblcms2",
             path: "Binaries/liblcms2.xcframework"
+        ),
+        .target(
+            name: "liblcms2_c",
+            dependencies: [
+                .target(name: "liblcms2")
+            ],
+            cSettings: [
+                .enableWarning("all")
+            ],
+            cxxSettings: [
+                .enableWarning("all")
+            ]
         ),
         .target(
             name: "LCMS2C",
@@ -45,9 +61,11 @@ let package = Package(
         .target(
             name: "LittleCMS",
             dependencies: [
+                .target(name: "liblcms2_c"),
                 .target(name: "LCMS2C")
             ],
             swiftSettings: [
+                .strictMemorySafety(),
                 .interoperabilityMode(.Cxx)
             ]
         ),

@@ -1,7 +1,7 @@
 # LittleCMS
 Precompiled [Little-CMS](https://github.com/mm2/Little-CMS) library for all Apple platforms with additional C++ helper interfaces and Swift interoperability.
 
-Current version: [Little CMS 2.17](https://github.com/mm2/Little-CMS/releases/tag/lcms2.17).
+Current version: [Little CMS 2.19.1](https://github.com/mm2/Little-CMS/releases/tag/lcms2.19.1).
 
 
 ## Supported platforms
