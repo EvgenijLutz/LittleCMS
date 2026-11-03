@@ -8,6 +8,7 @@
 #pragma once
 
 #include <LCMS2C/Common.hpp>
+#include <atomic>
 
 
 /// Colour profile.
@@ -52,9 +53,9 @@ public:
     
     LCMSColorProfile* fn_nullable createLinear(bool force = true) SWIFT_RETURNS_RETAINED SWIFT_NAME(createLinear(force:));
     
-    const char* fn_nonnull getName() fn_lifetimebound SWIFT_NAME(__getNameUnsafe()) { return _name; }
+    const char* fn_nonnull getName() /*fn_lifetimebound*/ SWIFT_NAME(__getNameUnsafe()) { return _name; }
     
-    const char* fn_nonnull getData() fn_lifetimebound SWIFT_COMPUTED_PROPERTY { return _data; }
+    const char* fn_nonnull getData() /*fn_lifetimebound*/ SWIFT_COMPUTED_PROPERTY { return _data; }
     long getSize() SWIFT_COMPUTED_PROPERTY { return _size; }
     
     bool checkIsLinear();

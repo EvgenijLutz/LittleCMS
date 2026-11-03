@@ -13,7 +13,7 @@ signing_identity=070BA25D98F2A17A61E3E27E31BE64C06F901016
 ndk_path="/Users/evgenij/Library/Android/sdk/ndk/29.0.14206865"
 
 # Little-CMS source code folder
-source_name="lcms2-2.19.1"
+source_name="lcms2-2.20"
 
 
 # Check if Xcode Developer, Android NDK and freetype folders exist
@@ -158,20 +158,20 @@ build_library() {
 
 
 # Build for Apple systems
-# build_library MacOSX           arm64  macos11
-# build_library MacOSX           x86_64 macos10.13
-# build_library iPhoneOS         arm64  ios12
-# build_library iPhoneSimulator  arm64  ios14-simulator
-# build_library iPhoneSimulator  x86_64 ios12-simulator
-# build_library AppleTVOS        arm64  tvos12
-# build_library AppleTVSimulator arm64  tvos12-simulator
-# build_library AppleTVSimulator x86_64 tvos12-simulator
-# build_library WatchOS          arm64  watchos8
-# build_library WatchSimulator   arm64  watchos8-simulator
-# build_library WatchSimulator   x86_64 watchos8-simulator
-# build_library XROS             arm64  xros1
-# build_library XRSimulator      arm64  xros1-simulator
-# build_library XRSimulator      x86_64 xros1-simulator
+build_library MacOSX           arm64  macos12
+build_library MacOSX           x86_64 macos12
+build_library iPhoneOS         arm64  ios15
+build_library iPhoneSimulator  arm64  ios15-simulator
+build_library iPhoneSimulator  x86_64 ios15-simulator
+build_library AppleTVOS        arm64  tvos15
+build_library AppleTVSimulator arm64  tvos15-simulator
+build_library AppleTVSimulator x86_64 tvos15-simulator
+build_library WatchOS          arm64  watchos9
+build_library WatchSimulator   arm64  watchos9-simulator
+build_library WatchSimulator   x86_64 watchos9-simulator
+build_library XROS             arm64  xros1
+build_library XRSimulator      arm64  xros1-simulator
+build_library XRSimulator      x86_64 xros1-simulator
 
 # # Build for Android
 # build_library Android aarch64 21

@@ -8,6 +8,7 @@
 #pragma once
 
 #include <LCMS2C/Common.hpp>
+#include <atomic>
 
 
 class LCMSColorProfile;

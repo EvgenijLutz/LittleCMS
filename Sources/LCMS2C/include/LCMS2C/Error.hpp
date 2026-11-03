@@ -16,14 +16,7 @@ enum class LCMSErrorCode: long {
 };
 
 
-static inline const char* fn_nonnull lcmsErrorCodeDescription(LCMSErrorCode code) {
-    const char* messages[] = {
-        "Unknown error",
-        "Not implemented"
-    };
-    
-    return messages[static_cast<long>(code)];
-}
+const char* fn_nonnull lcmsErrorCodeDescription(LCMSErrorCode code);
 
 
 #define LCMS_ERROR_LENGTH 128
@@ -42,4 +35,4 @@ struct LCMSError {
 
 
 void lcmsSetError(LCMSError* fn_nullable error fn_noescape, LCMSErrorCode code);
-void lcmsSetError(LCMSError* fn_nullable error fn_noescape, LCMSErrorCode code, const char* fn_nonnull __restrict format, ...) __printflike(3, 4);
+void lcmsSetError(LCMSError* fn_nullable error fn_noescape, LCMSErrorCode code, const char* fn_nonnull __restrict format, ...) __attribute__((format(printf, 3, 4)));

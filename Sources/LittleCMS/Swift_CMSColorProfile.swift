@@ -59,8 +59,8 @@ import liblcms2_c
     
     /// Open colour profile from a file.
     public convenience init(path: String) throws {
-        let profile = unsafe path.withCString { cPath in
-            unsafe "r".withCString { cMode in
+        let profile = path.withCString { cPath in
+            "r".withCString { cMode in
                 unsafe cmsOpenProfileFromFile(cPath, cMode)
             }
         }

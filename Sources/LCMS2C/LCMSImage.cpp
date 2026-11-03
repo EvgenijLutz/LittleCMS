@@ -5,6 +5,7 @@
 //  Created by Evgenij Lutz on 03.11.25.
 //
 
+#define _LIBCPP_REMOVE_TRANSITIVE_INCLUDES
 #include <LCMS2C/LCMSImage.hpp>
 #include <LCMS2C/ColorProfile.hpp>
 #include <lcms2.h>
@@ -210,6 +211,11 @@ bool LCMSImage::convertColorProfile(LCMSColorProfile* fn_nullable targetColorPro
         printf("Could not create color profile transform\n");
         cmsCloseProfile(dstProfile);
         cmsCloseProfile(srcProfile);
+        
+        if (proxyData != _data) {
+            delete [] proxyData;
+        }
+        
         return false;
     }
     
@@ -243,7 +249,6 @@ bool LCMSImage::convertColorProfile(LCMSColorProfile* fn_nullable targetColorPro
         
         delete [] proxyData;
     }
-    proxyData = nullptr;
     
     // Clean up
     delete [] tmpData;
@@ -421,6 +426,17 @@ LCMSImage* fn_nullable convertToLinearDCIP3(const char* fn_nonnull sourceData,
         iccProfileData = new char[iccProfileSize];
         
         cmsSaveProfileToMem(dstProfile, iccProfileData, &iccProfileSize);
+    }
+    else {
+        // Cleanup
+        cmsDeleteTransform(transform);
+        cmsCloseProfile(srcProfile);
+        cmsCloseProfile(dstProfile);
+        cmsFreeToneCurve(linear);
+        
+        delete [] linearP3;
+        
+        return nullptr;
     }
     
     

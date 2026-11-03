@@ -5,6 +5,7 @@
 //  Created by Evgenij Lutz on 06.07.26.
 //
 
+#define _LIBCPP_REMOVE_TRANSITIVE_INCLUDES
 #include <liblcms2_c/liblcms2_c.h>
 
 
